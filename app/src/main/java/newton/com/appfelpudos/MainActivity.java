@@ -1,8 +1,13 @@
 package newton.com.appfelpudos;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -77,5 +82,56 @@ class DadosPersonagem{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+}
+
+class MeuAdaptador extends ArrayAdapter{
+
+    public MeuAdaptador(@NonNull Context context, int resource) {
+        super(context, resource);
+    }
+
+    @Override
+    public void add(@Nullable Object object) {
+        super.add(object);
+    }
+
+    @Override
+    public int getCount() {
+        return super.getCount();
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        View minhaView;
+        minhaView = convertView;
+        viewPersonagem viewPersonagem;
+
+        if (convertView == null){
+
+            LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            minhaView = inflater.inflate(R.layout.layout_lista,parent,false);
+
+            viewPersonagem = new viewPersonagem();
+            viewPersonagem.icone = minhaView.findViewById(R.id.meuIcone);
+            viewPersonagem.titulo = minhaView.findViewById(R.id.meuTitulo);
+            viewPersonagem.descricao = minhaView.findViewById(R.id.meuDescricao);
+
+            minhaView.setTag(viewPersonagem);
+
+        }else{
+            viewPersonagem = (viewPersonagem) minhaView.getTag();
+        }
+
+        DadosPersonagem dadosPersonagem;
+        dadosPersonagem = (DadosPersonagem) this.getItem(position);
+
+        viewPersonagem.icone.setImageResource(dadosPersonagem.getIcone());
+        viewPersonagem.titulo.setText(dadosPersonagem.getTitulo());
+        viewPersonagem.descricao.setText(dadosPersonagem.getDescricao());
+
+        return minhaView;
     }
 }
