@@ -19,11 +19,17 @@ public class MainActivity extends AppCompatActivity {
 
     String[] listaNomes = {"Felpuro","Fofura","Lesmo","Bugado","Uruca","Racing","iOS"};
 
+    int[] listaIcones = {R.drawable.carrinho,R.drawable.carrinho,R.drawable.carrinho,
+            R.drawable.carrinho,R.drawable.carrinho,R.drawable.carrinho,R.drawable.carrinho};
+
+    String[] listaDescricoes = {"Felpuro","Fofura","Lesmo","Bugado","Uruca","Racing","iOS"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /* Trecho de codigo quando usa padrao do android
         ArrayAdapter<String> meuAdaptador = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,listaNomes);
@@ -38,7 +44,21 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, ""+listaNomes[position], Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
+
+
+        //Trecho de codigo quando uso meu proprio list
+
+        ListView minhaLista = findViewById(R.id.lista);
+        MeuAdaptador meuAdaptador = new MeuAdaptador(getApplicationContext(),R.layout.layout_lista);
+        int i =0;
+        for (String nome:listaNomes){
+            DadosPersonagem dadosPersonagem;
+            dadosPersonagem = new DadosPersonagem(listaIcones[i],nome,listaDescricoes[i]);
+            meuAdaptador.add(dadosPersonagem);
+            i++;
+        }
+        minhaLista.setAdapter(meuAdaptador);
 
     }
 }
