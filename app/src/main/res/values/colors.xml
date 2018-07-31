@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="corFundoIcone">#2cf925</color>
+    <color name="corFundoDescricao">#ffd37b</color>
+    <color name="corFundoTexto">#188300</color>
 </resources>
