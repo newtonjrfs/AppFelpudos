@@ -1,8 +1,10 @@
 package newton.com.appfelpudos;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,10 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     String[] listaNomes = {"Felpuro","Fofura","Lesmo","Bugado","Uruca","Racing","iOS"};
 
-    int[] listaIcones = {R.drawable.carrinho,R.drawable.carrinho,R.drawable.carrinho,
-            R.drawable.carrinho,R.drawable.carrinho,R.drawable.carrinho,R.drawable.carrinho};
+    int[] listaIcones = {R.drawable.felpudo,R.drawable.fofura,R.drawable.lesmo,
+            R.drawable.bugado,R.drawable.uruca,R.drawable.carrinho,R.drawable.ios};
 
-    String[] listaDescricoes = {"Felpuro","Fofura","Lesmo","Bugado","Uruca","Racing","iOS"};
+    String[] listaDescricoes = {"Felpuro e um cara legal","Fofura eu nao conheco","Lesmo tambem e massa",
+            "Bugado e chato","Uruca e igual o Wash","Racing e e correr","iOS e android"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //Trecho de codigo quando uso meu proprio list
 
         ListView minhaLista = findViewById(R.id.lista);
-        MeuAdaptador meuAdaptador = new MeuAdaptador(getApplicationContext(),R.layout.layout_lista);
+        final MeuAdaptador meuAdaptador = new MeuAdaptador(getApplicationContext(),R.layout.layout_lista);
         int i =0;
         for (String nome:listaNomes){
             DadosPersonagem dadosPersonagem;
@@ -58,9 +61,45 @@ public class MainActivity extends AppCompatActivity {
             meuAdaptador.add(dadosPersonagem);
             i++;
         }
+
+        minhaLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                DadosPersonagem dadosPersonagem;
+                dadosPersonagem = (DadosPersonagem) meuAdaptador.getItem(position);
+                criaAlerta(dadosPersonagem);
+
+            }
+        });
+
         minhaLista.setAdapter(meuAdaptador);
+    }
+
+    private void criaAlerta(DadosPersonagem dadosPersonagem) {
+
+        AlertDialog.Builder meuAlerta;
+        meuAlerta = new AlertDialog.Builder(MainActivity.this);
+
+        meuAlerta.setTitle(dadosPersonagem.getTitulo());
+        meuAlerta.setMessage(dadosPersonagem.getDescricao());
+
+        meuAlerta.setCancelable(true);
+        meuAlerta.setIcon(dadosPersonagem.getIcone());
+
+        meuAlerta.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "Confirmado o botao", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        meuAlerta.create();
+        meuAlerta.show();
 
     }
+
+
 }
 
 class viewPersonagem{

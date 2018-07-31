@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#81fc76</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#4060ff</color>
     <color name="corFundoIcone">#2cf925</color>
     <color name="corFundoDescricao">#ffd37b</color>
     <color name="corFundoTexto">#188300</color>
